@@ -1,1 +1,169 @@
+# JAVA
+
+## 객체 지향 언어
+
+- 절차 지향 언어(Procedural Programming)
+    - 예시: C언어
+    - 개체를 순차적으로 처리하기 때문에 프로그램 전체가 연결되어 있어야 함
+    - 컴퓨터의 처리 구조와 유사해 속도가 빠르다는 것이 장점
+    - 유지보수가 어렵고, 순서가 엄격해 비효율적이라는 것이 단점
+- 객체 지향 언어(Object-oriented Language)
+    - 객체 : 구체적인 사물, 사람, 추상적인 개념 등등
+    - 프로그램을 다수의 객체로 만들고 서로 상호작용하도록 만드는 언어
+    - 예시: C++, 파이썬, 자바 등등
+- 객체 지향 언어의 특징
+    - 캡슐화: 데이터와 알고리즘을 하나로 묶는 것, 외부에서 데이터와 코드의 형태를 알 수 없음
+    - 상속성: 상위 클래스의 모든 것을 하위 클래스가 이어 받는 것
+    - 다형성: 하나의 객체가 다른 여러 객체로 재구성되는 것 (ex. 오버로드, 오버라이드)
+    - 추상화: 프로그램을 만드는데 필요한 부분만 파악해 추출하고 나머지는 제거하는 것
+- 객체 지향 언어의 장점
+    - 재사용성: 상속의 특징으로 인해 코드를 재사용할 수 있음
+    - 생산성 증가: 독립된 개체로 이루어져 유지, 보수가 쉬움
+    - 자연스러운 모델링: 현실 세상과 닮아 있기 때문에 생각대로 구현 가능
+- 객체 지향 언어의 단점
+    - 느린 개발 속도: 모든 객체에 관해 이해도가 요구되기 때문에 시간이 오래 걸림
+    - 느린 실행 속도
+    - 높은 난이도
+
+## 운영체제 독립적
+
+- JVM(Java Virtual Machine)
+    - 자바로 작성된 프로그램이 돌아가게 해주는 프로그램
+    - 운영체제 별로 동일하게 작동하도록 .class 파일에게 환경 제공
+    - 어느 기기나 운영체제 에도 JVM이 설치되어 있다면 Java로 작성된 파일을 실행 가능하므로 높은 이식성을 가짐
+- JRE(Java Runtime Environment)
+    - JVM, Java Class Libraries, Class Loader로 구성
+    - Java Class Libraries: Java를 실행시키는데 필수적인 라이브러기 (ex. java.io, java.util등등)
+    - Class Loader: 필요한 클래스들을 JVM에 올려주는 역할
+    - 프로그램을 구동시키는 역할, 개발을 하는 것은 아님.
+- JDK(Java Development Kit)
+    - Java를 사용해 프로그램을 개발할 때 필요한 도구 모음
+    - JRE에 javac(코드를 클래스로 컴파일), jdb(작성된 코드를 디버깅)의 기능도 가짐.
+- 정리 사진
+    
+    ![Untitled](JAVA%20f51eb1903b0840409c00075ca3373ea9/Untitled.png)
+    
+- cf) JDK 8버전과 11버전이 자주 쓰이는 이유
+    - LTS (Long Term Support)가 다른 버전보다 안정적, 긴 기간을 관리받을 수 있음
+    
+    → 많은 개발자들이 상대적으로 안심할 수 있는 LTS버전 선호
+    
+    - 8버전이 최초의 LTS버전, 그 다음의 11버전도 LTS버전
+
+## JAVA 컴파일 과정
+
+- 컴파일 과정
+    1. 자바소스코드(.java)작성 및 실행(run)
+    2. 자바 컴파일러가 소스코드를 읽어 바이트 코드(.class)로 컴파일.(ckarhfh 바이트 코드파일은 아직 컴퓨터가 읽을 수 없는 코드임, 대신 JVM이 읽을 수 있는 코드)
+    3. 컴파일 된 바이트코드(.class)를 JVM의 클래스 로더에게 전달
+    4. 클래스 로더는 동적로딩을 통해 필요한 클래스들을 로딩 및 링크하여 런타임 데이터 영역(Runtime Data ARea), 즉 JVM의 메모리에 올림.
+    5. 실행엔진(Execution Engine)은 JVM 메모리에 올라온 바이트 코드들을 명령어 단위로 하나씩 가져와서 실행. 이 때 실행 엔진은 두가지 방식으로 변경.
+        1. 인터프리터 : 바이트 코드 명령어를 하나씩 읽어서 해석하고 실행 -> 하나하나의 실행으 빠르나, 전체적인 실행속도가 느림
+        2. JIT 컴파일러 : 바이트 코드 전체를 컴파일하여 바이너리 코드로 변경하고 이후에는 해당 메서드를 더 이상 인터프리팅하지 않고, 바이너리 코드를 직접 실행하는 방식. 전체적인 실행속도가 인터프리팅 방식보다 빠름.
+    
+    ![Untitled](JAVA%20f51eb1903b0840409c00075ca3373ea9/Untitled%201.png)
+    
+
+## Class Loader
+
+- 역할
+    
+    각각의 클래스 파일을 찾아 JVM의 메모리에 탑재해주는 것
+    
+- Loading
+    - 필요한 클래스 파일들을 찾아 탑재
+    - BootStrap ClassLodaer
+        - 다른 Class Loader의 부모 Class Loader
+        - JVM 구동에 가장 필수적인 라이브러리 클래스들을 탑재하는 역할
+        - 네이티브 코드로 작성
+    - Extensions ClassLoader
+        - BootStrap ClassLoader 다음의 우선 순위
+        - 다른 표준 핵심 Java Class의 라이브러리들을 탑재하는 역할
+    - Application ClassLoader (= System ClassLoader)
+        - Classpath에 있는 클래스들을 탑재
+        - 개발자가 자바로 작성한 클래스 파일들을 탑재하는 역할
+    - Visibility: 하위의 ClassLoader가 로딩한 클래스 파일은 상위 ClassLoader가 로딩한 클래스 파일을 볼 수 있음. 반대의 경우는 안됨
+    - 한 번 JVM에 탑재된 클래스 파일들은 종료 이전에는 JVM에서 제거 안 됨.
+- Linking
+    - 클래스 파일들을 검증, 사용할 수 있게 준비하는 과정
+    - Verification: 클래스 파일이 유효한지 확인하는 과정 (유효하지 않은 경우 Verify Error)
+    - Preparation: 필요한 static field메모리를 할당하고 이를 기반으로 초기화
+    - Resolution: Symbolic Reference 값을 Method Area의 런타임 환경을 통해 Direct Reference라는 주소값으로 변경 (new, instanceof)
+- Initialization
+    - 클래스 파일의 코드를 읽음
+    - 클래스와 인터페이스의 값들을 지정한 값들로 초기화하고 초기화 메소드 실행
+
+## Runtime Data Area
+
+- Method Area
+    - 인스턴스 생성을 위한 객체 구조, 생성자, 필드 등이 저장
+    - 클래스 데이터(static 변수, 메소드 데이터, Runtime Constant Pool)들 관리
+    - JVM당 하나만 생성되고, JVM의 모든 Thread들이 공유
+    - 다른 메모리 영역에서 정보 요청이 오면 실제 물리 메모리 주소로 변환해서 전달
+    - JVM 구동 시에 생성되어 종료까지 유지
+- Heap
+    - 코드 실행을 위한 Java롤 구성된 객체, JRE 클래스들이 탑재
+    - JVM당 하나만 생성, 모든 Java Stack영역에서 참조되어 Thread간의 공유
+    - 영역이 가득 찰 경우 OutOfMemoryError발생
+    - GC의 주 대상
+    - 인스턴스 생성 후 시간에 따라 Eden, Survivor0, Survivor1, Old, Perm 부분으로 나눔.
+    
+    ![Untitled](JAVA%20f51eb1903b0840409c00075ca3373ea9/Untitled%202.png)
+    
+- Java Stacks
+    - 각 Thread별로 할당되는 영역
+    - Heap영역보다 비교적 빠르고 동시성 문제 없음
+    - Frame : Local Variable + Operand Stack + Constant Pool Reference
+        - Local Variable: 메소드 안의 지역변수들
+        - Operand Stack: 메소드 안의 연산들을 위해 바이트 코드 명령문들
+        - Constant Pool Reference: Constant Pool 참조를 위한 공간
+    - 각 Thread는 메소드 호출 때 Frame을 push하고 마무리 되면 pop
+    - Stack 영역이 가득 차면 StackOverflowError발생
+- Native Method Stacks
+    - 다른 프로그래밍 언어로 작성된 메소드들을 다루는 영역
+    - Native Method가 실행되면 이 영역에 메소드가 쌓임
+- PC(Program Counter) Registers
+    - JVM에서 명령어 주소값을 저장할 공간이 필요 → 이 영역이 관리하여 추적
+    - Thread들은 각각의 PC Registers를 가짐
+    - 실행 메소드가 네이티브 → undefined 기록
+    - 실행 메소드가 네이티브X → 사용된 명령의 주소값 저장
+
+## Garbage Collection / GC Algorithm
+
+- Garbage Collection
+    - JVM에서 더 이상 사용되지 않는 데이터가 할당된 메모리를 해제
+    - 주로 Heap영역 내의 객체 중 참조되지 않은 데이터에 동작
+    - reachable : Heap영역 내부 객체들이 Method Area, Stack, Native Stack에서 참조 될 경우
+    - root set: reachable로 인식되게 만들어주는 JVM Runtime Area
+    - root set에 의해 참조 되지 않은 unreachable은 GC의 대상
+- Stop-The-World
+    - GC가 일어날 때 GC를 담당하는 Thread외의 다른 Thread들은 작동이 멈추는 현상
+    
+    → 너무 빈번한 GC는 성능이 저하되기 때문에 적절한 빈도의 GC가 실행되어야 함.
+    
+- Weak Generational Hypothesis
+    - 대부분의 객체는 빠르게 unreachable한 상태로 전환이 된다고 생각
+    - 오래된 영역에서 최신 영역으로의 참조 방향은 적다고 가정
+    
+    → 이 가설은 높은 경향성을 가지는 것으로 증명
+    
+- Mark And Sweep Algorithm
+    - Mark Phase: root set부터 출발해 참조되는 객체들에 대해 마크
+    - Sweep Phase: Mark Phase이후 마크되지 않은 객체들을 삭제
+    
+    → 메모리가 단편화 되는 단점
+    
+    ⇒Mark And Compact Algorithm
+    
+    - Mark And Sweep처럼 동작하고 Sweep이후 메모리를 정리해 메모리 단편화 해결
+- Major GC, Minor GC
+    - Minor GC
+        - JVM의 Young 영역에서 일어나는 GC
+        - Young의 각각의 영역이 가득 차는 경우 발생
+        - 마크된 영역이 삭제 되는 것이 아닌 다음 영역으로 복사
+        - Major GC에 비해 시간이 매우 짧음(Stop-The-World가 발생하지만 시간이 매우 짧아 이루어지지 않는다고 간주)
+    - Major GC
+        - Old 영역에서 일어나는 GC
+        - 긴 Stop-The-World 발생
+
 https://ssafycsstudy.notion.site/JAVA-18e1807a97f745fd8e7c247ba681afc5
